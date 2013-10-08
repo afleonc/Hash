@@ -34,6 +34,52 @@ public class Hash {
         t[i] = newChain;
 
     }
+    
+       public boolean contains(String newChain) {
+        int i = newChain.hashCode() % t.length;
+        while (!t[i].equals(newChain)) {
+            i = (i + 1) % t.length;
+            if (i == newChain.hashCode() % t.length) {
+                throw new IllegalStateException("Chain Not Found");
+            }
+
+        }
+
+        return true;
+    }
+
+    private int testElement(String newChain) {
+         int i;
+        if(newChain!=null){       i = newChain.hashCode() % t.length;}
+        else{i=0;}
+        while (t[i].equals(newChain)==false) {
+            i = (i + 1) % t.length;
+            if (i == newChain.hashCode() % t.length) {
+                return -1;
+            }
+
+        }
+
+        return i;
+    }
+
+    public boolean contains2(String newChain) {
+
+        if (testElement(newChain) == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public void add2(String newChain) {
+        int i = testElement("null");
+        if (i != -1) {
+            this.t[i] = newChain;
+        }
+
+    }
 
     public String[] dump() {
         int i = 0;
