@@ -80,11 +80,14 @@ public class Hash {
     }
     
     public void add2(String newChain) {
-        int i = testElement(null);
-        if (i != -1) {
-            this.t[i] = newChain;
+        int a = testElement2(null);
+        //On vérifie qu'il y ait de la place
+        int b = testElement2(newChain);
+        //On vérfifie que notre liste ne contient pas l'élément
+        if (a != -1 & b == -1) {
+            this.t[a] = newChain;
         }
-        
+
     }
 
     public String[] dump() {
