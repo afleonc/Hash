@@ -69,13 +69,13 @@ public class Hash2 {
 
     }
 
-    public String[] dump() {
+  public Hash2 dump() {
         int i = 0;
         while (i < this.t.length) {
             System.out.println(t[i]);
             i++;
         }
-        return t;
+        return this;
     }
 }
 
