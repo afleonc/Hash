@@ -9,9 +9,10 @@ package hash;
  * @author azathoth
  */
 public class Hash2 {
-    
- private String[] t;
- 
+
+    private String[] t;
+    private int nb_elem;
+
     public Hash2(int taille) {
         if (taille > 0) {
             if (taille != Integer.highestOneBit(taille)) {
@@ -23,8 +24,8 @@ public class Hash2 {
             throw new IllegalArgumentException("Value not valid");
         }
     }
-    
-     private int testElement2(String newChain) {
+
+    private int testElement(String newChain) {
         //Méthode testElement avec l'opération bit
         int i;
         int startPoint;
@@ -48,9 +49,9 @@ public class Hash2 {
         return i;
     }
 
-    public boolean contains2(String newChain) {
+    public boolean contains(String newChain) {
 //Méthode contains réfactorée
-        if (testElement2(newChain) == -1) {
+        if (testElement(newChain) == -1) {
             return false;
         } else {
             return true;
@@ -58,18 +59,59 @@ public class Hash2 {
 
     }
 
-    public void add2(String newChain) {
-        int a = testElement2(null);
+    public void add(String newChain) {
+        int a = testElement(null);
         //On vérifie qu'il y ait de la place
-        int b = testElement2(newChain);
+        int b = testElement(newChain);
         //On vérfifie que notre liste ne contient pas l'élément
         if (a != -1 & b == -1) {
+            if (nb_elem == this.t.length / 2) {
+                this.redim();
+            }
             this.t[a] = newChain;
+            this.nb_elem++;
         }
 
     }
 
-  public Hash2 dump() {
+////    public void redim() {
+////        /*     System.out.println("Redim");
+////        System.out.println(t.length << 1);*/
+////
+////        String[] t_tmp = new String[t.length << 1];
+////        //this=new Hash2(t.length+1);
+////        int i = 0;
+////        while (i < t.length) {
+////            t_tmp[i] = t[i];
+////            i++;
+////        }
+////        t = t_tmp;
+////
+////    }
+    public void addAll(Hash2 hash) {
+//Version refactorée de addAll
+        int i = 0;
+        while (i < hash.t.length) {
+            this.add(hash.t[i]);
+            i++;
+        }
+
+    }
+
+  
+
+    public void redim() {
+//Version refactorée de redim
+        Hash2 newHash = new Hash2(this.t.length + 1);
+
+        newHash.addAll(this);
+        
+        this.t=newHash.t;
+
+
+    }
+
+    public Hash2 dump() {
         int i = 0;
         while (i < this.t.length) {
             System.out.println(t[i]);
@@ -78,5 +120,3 @@ public class Hash2 {
         return this;
     }
 }
-
-
