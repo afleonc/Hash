@@ -61,6 +61,7 @@ public class Hash {
     }
     
     private int testElement(String newChain) {
+        //Méthode testElement avec l'opérateur %
         int i;
         int startPoint;
         if (newChain != null) {
@@ -81,9 +82,33 @@ public class Hash {
         return i;
     }
     
+        private int testElement2(String newChain) {
+        //Méthode testElement avec l'opération bit
+        int i;
+        int startPoint;
+        if (newChain != null) {
+            i = newChain.hashCode() & (t.length - 1);//newChain.hashCode() % t.length;
+
+            //x % 2n == x & (2n - 1)
+            startPoint = newChain.hashCode() & (t.length - 1);
+        } else {
+            i = 0;
+            startPoint = 0;
+        }
+        while (t[i] != newChain) {
+            i = (i + 1) & (t.length - 1);
+            if (i == startPoint) {
+                return -1;
+            }
+
+        }
+
+        return i;
+    }
+    
     public boolean contains2(String newChain) {
         
-        if (testElement(newChain) == -1) {
+        if (testElement2(newChain) == -1) {
             return false;
         } else {
             return true;
