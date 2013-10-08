@@ -127,13 +127,13 @@ public class Hash {
 
     }
 
-    public String[] dump() {
+ public Hash dump() {
         int i = 0;
         while (i < this.t.length) {
             System.out.println(t[i]);
             i++;
         }
-        return t;
+        return this;
     }
 
     /*   @Override
