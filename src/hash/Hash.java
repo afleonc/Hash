@@ -14,16 +14,16 @@ public class Hash {
 
     public Hash(int taille) {
     //Ancienne version du constructeur
-      /*  int tryOne = taille & (taille - 1);
+        int tryOne = taille & (taille - 1);
         if (tryOne == 0 && taille > 0) {
             // System.out.println("vrai");
             t = new String[taille];
         } else {
             throw new IllegalArgumentException("Value not valid");
-        }*/
+        }
     
     //Nouvelle version du constructeur
-         if (taille > 0) {
+      /*   if (taille > 0) {
             if (taille != Integer.highestOneBit(taille)) {
                 t = new String[Integer.highestOneBit(taille) << 1];
             } else {
@@ -31,35 +31,51 @@ public class Hash {
             }
         } else {
             throw new IllegalArgumentException("Value not valid");
-        }
+        }*/
     }
 
+
+    public int testElement(String newChain){
+       int startPoint = newChain.hashCode() % t.length;
+       int i = startPoint;
+        while (t[i]!=null && !t[i].equals(newChain)) {
+            i = (i + 1) % t.length;
+            if (i == startPoint) {
+                return -1;
+            }
+        }
+        if(t[i]==null){
+            return i + t.length;
+        }
+        return i;
+    }
+    
     public void add(String newChain) {
-        int i = newChain.hashCode() % t.length;
-        while (t[i] != null&&t[i]!=newChain) {
-            i = (i + 1) % t.length;
-            if (i == newChain.hashCode() % t.length) {
-                throw new IllegalStateException("Table is full");
+        if (testElement(newChain)==-1){
+            throw new IllegalStateException("The table is full");
+        }else{
+            if(testElement(newChain)>t.length){
+                t[testElement(newChain)-t.length] = newChain;
+            }else{
+                System.out.println(testElement(newChain));
+                t[testElement(newChain)] = newChain;
             }
-            
         }
-        t[i] = newChain;
-
     }
-    
-    public boolean contains(String newChain) {
-        int i = newChain.hashCode() % t.length;
-        while (t[i] != newChain) {
-            i = (i + 1) % t.length;
-            if (i == newChain.hashCode() % t.length) {
-                throw new IllegalStateException("Chain Not Found");
-            }
-            
-        }
         
-        return true;
+    public boolean contains(String newChain){
+        if (testElement(newChain)==-1){
+            return false;
+        }else{
+            if(testElement(newChain)>t.length){
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
     
+            /*
     private int testElement(String newChain) {
         //Méthode testElement avec l'opérateur %
         int i;
@@ -104,8 +120,8 @@ public class Hash {
         }
 
         return i;
-    }
-    
+    }*/
+    /*
     public boolean contains2(String newChain) {
         
         if (testElement2(newChain) == -1) {
@@ -126,7 +142,7 @@ public class Hash {
         }
 
     }
-
+*/
  public Hash dump() {
         int i = 0;
         while (i < this.t.length) {
@@ -136,14 +152,4 @@ public class Hash {
         return this;
     }
 
-    /*   @Override
-     public StringBuilder toString() {
-     System.out.println(i);
-          
-     while(i<this.t.length)
-     {
-            
-     }
-     return "Hash{" + "t=" + t + '}';
-     }*/
 }
