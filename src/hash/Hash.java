@@ -13,10 +13,22 @@ public class Hash {
     String[] t;
 
     public Hash(int taille) {
-        int tryOne = taille & (taille - 1);
+    //Ancienne version du constructeur
+      /*  int tryOne = taille & (taille - 1);
         if (tryOne == 0 && taille > 0) {
             // System.out.println("vrai");
             t = new String[taille];
+        } else {
+            throw new IllegalArgumentException("Value not valid");
+        }*/
+    
+    //Nouvelle version du constructeur
+         if (taille > 0) {
+            if (taille != Integer.highestOneBit(taille)) {
+                t = new String[Integer.highestOneBit(taille) << 1];
+            } else {
+                t = new String[Integer.highestOneBit(taille)];
+            }
         } else {
             throw new IllegalArgumentException("Value not valid");
         }
