@@ -10,7 +10,7 @@ package hash;
  */
 public class Hash2 {
     
- String[] t;
+ private String[] t;
  
     public Hash2(int taille) {
         if (taille > 0) {
