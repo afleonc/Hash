@@ -10,7 +10,7 @@ package hash;
  */
 public class Hash {
 
-    String[] t;
+    private String[] t;
 
     public Hash(int taille) {
     //Ancienne version du constructeur
