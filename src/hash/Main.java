@@ -11,27 +11,14 @@ package hash;
 public class Main {
 
     public static void main(String[] args) {
-
-
-        Hash hash = new Hash(2);
-
-        hash.add("Felipe");
-        hash.add("Blaise");
-        hash.add("Blaise");
-        hash.add("Blaise");
-       
-        hash.dump();
-
-
-////   Hash hash = new Hash(1024);
-////    for(int i=0; i<1024; i++) {
-////      hash.add(Integer.toString(i));
-////    }
-////   
-////    hash.dump();
-
-
-
-
+        Hash2 hash = new Hash2(1);
+        Hash2 hash2 = new Hash2(1);
+        for (int i = 0; i < 1024; i += 2) {
+            hash.add(Integer.toString(i));
+            hash2.add(Integer.toString(i + 1));
+        }
+        hash.add("hell");
+        hash2.add("hell");
+        System.out.println(hash2.intersect(hash));
     }
 }

@@ -51,7 +51,7 @@ public class Hash {
         if (testElement(newChain)==-1){
             throw new IllegalStateException("The table is full");
         }else{
-            t[testElement(newChain)-t.length] = newChain;
+            t[testElement(newChain)] = newChain;
         }
     }
         
@@ -66,7 +66,28 @@ public class Hash {
             }
         }
     }
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        int i=0;
+        while(i<t.length-1){
+            if(t[i]!=null){
+                builder.append(t[i]);
+                if (t[i + 1] != null) {
+                    builder.append(", ");
+                }
+            }
+            i++;
+        }
+        if(t[i]!=null){
+            builder.append(t[t.length-1]);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
     
+            
             /*
     private int testElement(String newChain) {
         //Méthode testElement avec l'opérateur %
