@@ -44,9 +44,6 @@ public class Hash {
                 return -1;
             }
         }
-        if(t[i]==null){
-            return i + t.length;
-        }
         return i;
     }
     
@@ -54,12 +51,7 @@ public class Hash {
         if (testElement(newChain)==-1){
             throw new IllegalStateException("The table is full");
         }else{
-            if(testElement(newChain)>t.length){
-                t[testElement(newChain)-t.length] = newChain;
-            }else{
-                System.out.println(testElement(newChain));
-                t[testElement(newChain)] = newChain;
-            }
+            t[testElement(newChain)-t.length] = newChain;
         }
     }
         
@@ -67,7 +59,7 @@ public class Hash {
         if (testElement(newChain)==-1){
             return false;
         }else{
-            if(testElement(newChain)>t.length){
+            if(t[testElement(newChain)]==null){
                 return false;
             }else{
                 return true;
@@ -143,7 +135,7 @@ public class Hash {
 
     }
 */
- public Hash dump() {
+    public Hash dump() {
         int i = 0;
         while (i < this.t.length) {
             System.out.println(t[i]);
